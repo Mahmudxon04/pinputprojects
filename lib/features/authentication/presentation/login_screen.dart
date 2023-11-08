@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:productive/core/widgets/w_button.dart';
+import 'package:productive/features/authentication/presentation/pages/forgot_password/forgot_password_page.dart';
 import 'package:productive/features/authentication/presentation/widgets/social_media_login_button.dart';
+import 'package:productive/features/authentication/presentation/pages/verification/verification_page.dart';
 
 import '../../../assets/constants/colors.dart';
 import '../../../assets/constants/icons.dart';
@@ -127,9 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Builder(builder: (context) {
-        return GestureDetector(
+        resizeToAvoidBottomInset: false,
+        body: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
             if (FocusScope.of(context).hasFocus) {
@@ -210,7 +211,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordPage(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Forgot password?',
                         style: TextStyle(
@@ -225,9 +233,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   WButton(
                     isDisabled: !isLoginDataValid,
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        print("We have a valid data");
-                      }
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const VerificationPage(),
+                        ),
+                      );
                     },
                     text: 'Login',
                   ),
@@ -266,8 +276,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-        );
-      }),
-    );
+        ));
   }
 }

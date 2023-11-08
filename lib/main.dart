@@ -30,10 +30,10 @@ class _AppState extends State<App> {
         onGenerateRoute: (settings) => MaterialPageRoute(
           builder: (_) => const SizedBox(),
         ),
-        builder: (context, child) => AuthenticatedUser(
+        home: AuthenticatedUser(
           child: Builder(builder: (context) {
             print("Came here");
-            
+
             if (AuthenticatedUser.maybeOf(context)?.user == null) {
               return const LoginScreen();
             } else {
